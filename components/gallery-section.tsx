@@ -110,6 +110,69 @@ const galleryItems: GalleryItem[] = [
         title: "Video de Proyecto – Avance de Obra",
         description: "Documentación en video de avance de obra y control de calidad.",
     },
+    {
+        id: 11,
+        src: "/images/gallery/video-obra-3.mp4",
+        thumb: "/images/gallery/henrry-loja-panoramica.jpg",
+        type: "video",
+        category: "Obras & Proyectos",
+        title: "Registro de Obra – Video 3",
+        description: "Documentación en video de actividades de obra civil.",
+    },
+    {
+        id: 12,
+        src: "/images/gallery/video-obra-4.mp4",
+        thumb: "/images/gallery/henrry-loja-panoramica.jpg",
+        type: "video",
+        category: "Obras & Proyectos",
+        title: "Registro de Obra – Video 4",
+        description: "Registro visual de avance y procesos constructivos.",
+    },
+    {
+        id: 13,
+        src: "/images/gallery/video-obra-5.mp4",
+        thumb: "/images/gallery/henrry-loja-panoramica.jpg",
+        type: "video",
+        category: "Obras & Proyectos",
+        title: "Registro de Obra – Video 5",
+        description: "Registro visual de avance y procesos constructivos.",
+    },
+    {
+        id: 14,
+        src: "/images/gallery/video-obra-6.mp4",
+        thumb: "/images/gallery/henrry-loja-panoramica.jpg",
+        type: "video",
+        category: "Obras & Proyectos",
+        title: "Registro de Obra – Video 6",
+        description: "Registro visual de avance y procesos constructivos.",
+    },
+    {
+        id: 15,
+        src: "/images/gallery/video-obra-7.mp4",
+        thumb: "/images/gallery/henrry-loja-panoramica.jpg",
+        type: "video",
+        category: "Obras & Proyectos",
+        title: "Registro de Obra – Video 7",
+        description: "Registro visual de avance y procesos constructivos.",
+    },
+    {
+        id: 16,
+        src: "/images/gallery/video-obra-8.mp4",
+        thumb: "/images/gallery/henrry-loja-panoramica.jpg",
+        type: "video",
+        category: "Obras & Proyectos",
+        title: "Registro de Obra – Video 8",
+        description: "Registro visual de avance y procesos constructivos.",
+    },
+    {
+        id: 17,
+        src: "/images/gallery/video-obra-9.mp4",
+        thumb: "/images/gallery/henrry-loja-panoramica.jpg",
+        type: "video",
+        category: "Obras & Proyectos",
+        title: "Registro de Obra – Video 9",
+        description: "Registro visual de avance y procesos constructivos.",
+    },
 
     // Loja & Entorno
     {
@@ -206,8 +269,8 @@ export function GallerySection() {
                             size="sm"
                             onClick={() => setActiveCategory(cat)}
                             className={`rounded-full text-xs sm:text-sm ${activeCategory === cat
-                                    ? "glow-teal-sm"
-                                    : "border-primary/30 hover:bg-primary/10 hover:border-primary/50"
+                                ? "glow-teal-sm"
+                                : "border-primary/30 hover:bg-primary/10 hover:border-primary/50"
                                 }`}
                         >
                             {cat}
