@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -60,67 +59,40 @@ export function AboutSection() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* Image Side */}
-          <div className="relative">
-            <div className="relative aspect-[4/5] max-w-md mx-auto lg:mx-0">
-              {/* Main Image */}
-              <div className="relative z-10 rounded-2xl overflow-hidden border border-primary/20 glow-teal">
-                <Image
-                  src={imgPath("/images/henrry-lojan.jpg")}
-                  alt="Henrry Lojan Tenesaca - Ingeniero Civil"
-                  width={500}
-                  height={625}
-                  className="w-full h-full object-cover object-top"
-                  unoptimized
-                />
-              </div>
-
-              {/* Floating skill badges - hidden on mobile */}
-              {skillBadges.map((skill, index) => (
+          {/* Left Side - Info Cards */}
+          <div className="space-y-6">
+            {/* Skill badges */}
+            <div className="flex flex-wrap gap-3">
+              {skillBadges.map((skill) => (
                 <div
                   key={skill.label}
-                  className={`hidden sm:flex absolute z-20 bg-card border border-primary/30 rounded-full px-3 py-1.5 shadow-lg animate-float glow-teal-sm ${index === 0
-                    ? "-top-4 left-1/4"
-                    : index === 1
-                      ? "top-1/4 -right-4"
-                      : index === 2
-                        ? "bottom-1/3 -left-4"
-                        : "-bottom-4 right-1/4"
-                    }`}
-                  style={{ animationDelay: `${index * 200}ms` }}
+                  className="flex bg-card border border-primary/30 rounded-full px-3 py-1.5 shadow-lg glow-teal-sm"
                 >
                   <div className="flex items-center gap-1.5">
                     <skill.icon className="w-3.5 h-3.5 text-primary" />
-                    <span className="text-xs font-medium text-foreground">
-                      {skill.label}
-                    </span>
+                    <span className="text-xs font-medium text-foreground">{skill.label}</span>
                   </div>
                 </div>
               ))}
-
-              {/* Decorative background */}
-              <div className="absolute -inset-4 bg-gradient-to-br from-primary/10 to-transparent rounded-3xl -z-10" />
             </div>
 
-            {/* Key Facts card below image */}
-            <div className="mt-8 mx-auto max-w-md lg:max-w-none">
-              <Card className="bg-card/50 backdrop-blur border-border">
-                <CardContent className="p-5">
-                  <div className="text-xs font-semibold text-primary uppercase tracking-wider mb-4 font-mono flex items-center gap-2">
-                    <FileText className="w-3.5 h-3.5" />
-                    Datos Profesionales
-                  </div>
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-                    {keyFacts.map((fact) => (
-                      <div key={fact.label} className="flex flex-col">
-                        <span className="text-xs text-muted-foreground">{fact.label}</span>
-                        <span className="text-sm font-medium text-foreground">{fact.value}</span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+            {/* Key Facts card */}
+            <Card className="bg-card/50 backdrop-blur border-border">
+              <CardContent className="p-5">
+                <div className="text-xs font-semibold text-primary uppercase tracking-wider mb-4 font-mono flex items-center gap-2">
+                  <FileText className="w-3.5 h-3.5" />
+                  Datos Profesionales
+                </div>
+                <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+                  {keyFacts.map((fact) => (
+                    <div key={fact.label} className="flex flex-col">
+                      <span className="text-xs text-muted-foreground">{fact.label}</span>
+                      <span className="text-sm font-medium text-foreground">{fact.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
           {/* Content Side */}
