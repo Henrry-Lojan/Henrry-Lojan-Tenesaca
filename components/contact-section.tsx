@@ -37,8 +37,8 @@ const contactInfo = [
   {
     icon: Phone,
     label: "Telefono",
-    value: "+593 995 970 220",
-    href: "tel:+593995970220",
+    value: "+593 959 702 208",
+    href: "tel:+593959702208",
   },
   {
     icon: MapPin,
@@ -270,7 +270,7 @@ export function ContactSection() {
                   </span>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Abierto para proyectos de ingenieria civil, consultoria BIM/SIG 
+                  Abierto para proyectos de ingenieria civil, consultoria BIM/SIG
                   y colaboraciones profesionales.
                 </p>
               </CardContent>
