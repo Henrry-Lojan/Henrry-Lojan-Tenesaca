@@ -22,6 +22,7 @@ import {
   Github,
   ExternalLink,
 } from "lucide-react"
+import { imgPath } from "@/lib/img-path"
 
 const categories = [
   "Todos",
@@ -199,11 +200,10 @@ export function ProjectsSection() {
               variant={activeCategory === category ? "default" : "outline"}
               size="sm"
               onClick={() => setActiveCategory(category)}
-              className={`rounded-full ${
-                activeCategory === category 
-                  ? "glow-green-sm" 
+              className={`rounded-full ${activeCategory === category
+                  ? "glow-green-sm"
                   : "border-primary/30 hover:bg-primary/10 hover:border-primary/50"
-              }`}
+                }`}
             >
               {category}
             </Button>
@@ -220,10 +220,11 @@ export function ProjectsSection() {
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
-                  src={project.image || "/placeholder.svg"}
+                  src={imgPath(project.image) || "/placeholder.svg"}
                   alt={project.title}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  unoptimized
                 />
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -282,10 +283,11 @@ export function ProjectsSection() {
                 {/* Project Image */}
                 <div className="relative aspect-video rounded-lg overflow-hidden my-4 border border-primary/20">
                   <Image
-                    src={selectedProject.image || "/placeholder.svg"}
+                    src={imgPath(selectedProject.image) || "/placeholder.svg"}
                     alt={selectedProject.title}
                     fill
                     className="object-cover"
+                    unoptimized
                   />
                 </div>
 

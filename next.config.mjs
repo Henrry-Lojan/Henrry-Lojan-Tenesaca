@@ -1,11 +1,10 @@
 /** @type {import('next').NextConfig} */
 const isProd = process.env.NODE_ENV === 'production'
+const basePath = isProd ? '/Henrry-Lojan-Tenesaca' : ''
 
 const nextConfig = {
   output: 'export',
-  // basePath y assetPrefix solo en producción (GitHub Pages)
-  // En desarrollo local (npm run dev) las rutas funcionan normalmente
-  basePath: isProd ? '/Henrry-Lojan-Tenesaca' : '',
+  basePath,
   assetPrefix: isProd ? '/Henrry-Lojan-Tenesaca/' : '',
   typescript: {
     ignoreBuildErrors: true,
@@ -13,6 +12,10 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
 }
 
 export default nextConfig
+

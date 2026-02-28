@@ -4,6 +4,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Mail, ChevronDown, Github, Linkedin, Download, MapPin } from "lucide-react"
+import { imgPath } from "@/lib/img-path"
 
 const socialLinks = [
   { icon: Linkedin, href: "https://www.linkedin.com/in/henrry-lojan-tenesaca-83b7a3227/", label: "LinkedIn" },
@@ -128,12 +129,13 @@ export function HeroSection() {
               {/* Main image */}
               <div className="relative z-10 rounded-2xl overflow-hidden border border-primary/30 glow-teal">
                 <Image
-                  src="/images/henrry-lojan.jpg"
+                  src={imgPath("/images/henrry-lojan.jpg")}
                   alt="Henrry Lojan Tenesaca - Ingeniero Civil"
                   width={500}
                   height={625}
                   className="w-full h-full object-cover object-top"
                   priority
+                  unoptimized
                 />
                 {/* Subtle gradient overlay at bottom */}
                 <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-background/50 to-transparent" />

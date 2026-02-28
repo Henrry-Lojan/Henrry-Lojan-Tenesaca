@@ -17,6 +17,7 @@ import {
   FileText,
   ChevronRight,
 } from "lucide-react"
+import { imgPath } from "@/lib/img-path"
 
 const stats = [
   { icon: Building2, value: "15+", label: "Edificios Entregados" },
@@ -65,11 +66,12 @@ export function AboutSection() {
               {/* Main Image */}
               <div className="relative z-10 rounded-2xl overflow-hidden border border-primary/20 glow-teal">
                 <Image
-                  src="/images/henrry-lojan.jpg"
+                  src={imgPath("/images/henrry-lojan.jpg")}
                   alt="Henrry Lojan Tenesaca - Ingeniero Civil"
                   width={500}
                   height={625}
                   className="w-full h-full object-cover object-top"
+                  unoptimized
                 />
               </div>
 
