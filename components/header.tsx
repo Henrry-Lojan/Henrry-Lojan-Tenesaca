@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Menu, Download, HardHat } from "lucide-react"
+import { imgPath } from "@/lib/img-path"
 
 const navItems = [
   { label: "Inicio", href: "#home" },
@@ -69,7 +70,7 @@ export function Header() {
           {/* CTA Button - Desktop */}
           <div className="hidden lg:block">
             <Button asChild className="glow-teal-sm hover:glow-teal transition-all">
-              <a href="/henrry-lojan-cv.pdf" download="CV_Henrry_Lojan.pdf">
+              <a href={imgPath('/henrry-lojan-cv.pdf')} download="CV_Henrry_Lojan.pdf">
                 <Download className="w-4 h-4" />
                 Descargar CV
               </a>
@@ -97,7 +98,7 @@ export function Header() {
                   </Link>
                 ))}
                 <Button asChild className="mt-4 glow-teal-sm">
-                  <a href="/henrry-lojan-cv.pdf" download="CV_Henrry_Lojan.pdf">
+                  <a href={imgPath('/henrry-lojan-cv.pdf')} download="CV_Henrry_Lojan.pdf">
                     <Download className="w-4 h-4" />
                     Descargar CV
                   </a>
