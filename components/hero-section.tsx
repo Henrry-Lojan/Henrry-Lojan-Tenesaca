@@ -87,7 +87,7 @@ export function HeroSection() {
                 </a>
               </Button>
               <Button size="lg" variant="outline" className="border-primary/40 hover:bg-primary/10 hover:border-primary/60 bg-transparent gap-2 flex-1 sm:flex-none" asChild>
-                <a href="/henrry-lojan-cv.pdf" download="CV_Henrry_Lojan.pdf">
+                <a href="https://drive.google.com/file/d/1qQVsvnN7ptf9f7D--IzT3iy9A0czMD_z/view?usp=sharing" target="_blank" rel="noopener noreferrer">
                   <Download className="w-4 h-4" />
                   Descargar CV
                 </a>

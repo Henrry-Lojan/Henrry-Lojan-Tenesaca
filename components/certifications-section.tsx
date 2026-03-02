@@ -181,8 +181,8 @@ export function CertificationsSection() {
                   <div className="flex items-start gap-4">
                     <div
                       className={`shrink-0 w-12 h-12 rounded-xl flex items-center justify-center ${item.highlight
-                          ? "bg-primary text-primary-foreground glow-teal"
-                          : "bg-secondary border border-border text-muted-foreground"
+                        ? "bg-primary text-primary-foreground glow-teal"
+                        : "bg-secondary border border-border text-muted-foreground"
                         }`}
                     >
                       <GraduationCap className="w-6 h-6" />
@@ -238,8 +238,8 @@ export function CertificationsSection() {
                   <div className="flex items-start gap-4">
                     <div
                       className={`shrink-0 w-12 h-12 rounded-xl flex items-center justify-center ${cert.highlight
-                          ? "bg-primary text-primary-foreground glow-teal"
-                          : "bg-secondary border border-border text-muted-foreground"
+                        ? "bg-primary text-primary-foreground glow-teal"
+                        : "bg-secondary border border-border text-muted-foreground"
                         }`}
                     >
                       <Award className="w-6 h-6" />
@@ -326,6 +326,38 @@ export function CertificationsSection() {
             ))}
           </div>
         </div>
+        {/* ── Documentos descargables ── */}
+        <div className="mt-16 rounded-2xl border border-primary/20 bg-primary/5 p-6 sm:p-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
+            <div className="flex-1">
+              <h3 className="text-lg font-bold text-foreground mb-1">📄 Documentos Oficiales</h3>
+              <p className="text-sm text-muted-foreground">
+                Descarga mi Hoja de Vida completa y el Anexo de Certificaciones con los respaldos de mis credenciales profesionales.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+              <a
+                href="https://drive.google.com/file/d/1qQVsvnN7ptf9f7D--IzT3iy9A0czMD_z/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-semibold transition-all duration-200 shadow-md hover:shadow-primary/30"
+              >
+                <ExternalLink className="w-4 h-4" />
+                Hoja de Vida
+              </a>
+              <a
+                href="https://drive.google.com/file/d/1V_84JN8N1LLu7DAToIEefC_2BNJFjZzw/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border border-primary/40 bg-card hover:bg-primary/10 hover:border-primary/60 text-sm font-semibold text-foreground transition-all duration-200"
+              >
+                <Award className="w-4 h-4 text-primary" />
+                Anexo Certificaciones
+              </a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   )

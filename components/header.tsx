@@ -70,7 +70,7 @@ export function Header() {
           {/* CTA Button - Desktop */}
           <div className="hidden lg:block">
             <Button asChild className="glow-teal-sm hover:glow-teal transition-all">
-              <a href={imgPath('/henrry-lojan-cv.pdf')} download="CV_Henrry_Lojan.pdf">
+              <a href="https://drive.google.com/file/d/1qQVsvnN7ptf9f7D--IzT3iy9A0czMD_z/view?usp=sharing" target="_blank" rel="noopener noreferrer">
                 <Download className="w-4 h-4" />
                 Descargar CV
               </a>
@@ -98,7 +98,7 @@ export function Header() {
                   </Link>
                 ))}
                 <Button asChild className="mt-4 glow-teal-sm">
-                  <a href={imgPath('/henrry-lojan-cv.pdf')} download="CV_Henrry_Lojan.pdf">
+                  <a href="https://drive.google.com/file/d/1qQVsvnN7ptf9f7D--IzT3iy9A0czMD_z/view?usp=sharing" target="_blank" rel="noopener noreferrer">
                     <Download className="w-4 h-4" />
                     Descargar CV
                   </a>
