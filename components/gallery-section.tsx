@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { X, ChevronLeft, ChevronRight, Play, ZoomIn, Camera, Video } from "lucide-react"
+import { X, ChevronLeft, ChevronRight, Play, ZoomIn, Camera, Video, BookOpen, Mountain, HardHat } from "lucide-react"
 import { imgPath } from "@/lib/img-path"
 
 type MediaType = "image" | "video"
@@ -20,7 +20,8 @@ interface GalleryItem {
 }
 
 const galleryItems: GalleryItem[] = [
-    // Topografía & Campo
+
+    // ── TOPOGRAFÍA ──────────────────────────────────────────
     {
         id: 1,
         src: "/images/gallery/topografia-trabajo-campo.jpg",
@@ -48,10 +49,64 @@ const galleryItems: GalleryItem[] = [
         title: "Equipos de Medición de Precisión",
         description: "Estación total de alta precisión utilizada en proyectos de control geométrico.",
     },
-
-    // GIS & Geomática
     {
         id: 4,
+        src: "/images/gallery/visita-obra-campo-1.jpg",
+        thumb: "/images/gallery/visita-obra-campo-1.jpg",
+        type: "image",
+        category: "Topografía",
+        title: "Replanteo Topográfico en Obra",
+        description: "Actividades de replanteo y control de puntos en campo durante visita de obra.",
+    },
+    {
+        id: 5,
+        src: "/images/gallery/visita-obra-campo-2.jpg",
+        thumb: "/images/gallery/visita-obra-campo-2.jpg",
+        type: "image",
+        category: "Topografía",
+        title: "Medición de Precisión – Obra Civil",
+        description: "Control geométrico de elementos estructurales con equipo topográfico de alta precisión.",
+    },
+    {
+        id: 6,
+        src: "/images/gallery/visita-obra-campo-3.jpg",
+        thumb: "/images/gallery/visita-obra-campo-3.jpg",
+        type: "image",
+        category: "Topografía",
+        title: "Levantamiento Topográfico – Campo",
+        description: "Levantamiento de puntos de control para revisión de avance de obra.",
+    },
+    {
+        id: 7,
+        src: "/images/gallery/visita-obra-campo-4.jpg",
+        thumb: "/images/gallery/visita-obra-campo-4.jpg",
+        type: "image",
+        category: "Topografía",
+        title: "Red de Control – Puntos Geodésicos",
+        description: "Materialización y medición de puntos de red de control geodésica en obra.",
+    },
+    {
+        id: 8,
+        src: "/images/gallery/visita-obra-campo-5.jpg",
+        thumb: "/images/gallery/visita-obra-campo-5.jpg",
+        type: "image",
+        category: "Topografía",
+        title: "Control de Cota – Elementos Estructurales",
+        description: "Verificación de cotas y alineación de elementos estructurales con estación total.",
+    },
+    {
+        id: 9,
+        src: "/images/gallery/visita-obra-campo-6.jpg",
+        thumb: "/images/gallery/visita-obra-campo-6.jpg",
+        type: "image",
+        category: "Topografía",
+        title: "Topografía de Obra – Vista General",
+        description: "Vista general del trabajo topográfico en campo durante ejecución de obra.",
+    },
+
+    // ── GIS & GEOMÁTICA ───────────────────────────────────────
+    {
+        id: 20,
         src: "/images/gallery/gis-clasificacion-uso-suelo.jpg",
         thumb: "/images/gallery/gis-clasificacion-uso-suelo.jpg",
         type: "image",
@@ -60,7 +115,7 @@ const galleryItems: GalleryItem[] = [
         description: "Análisis de clasificación supervisada de cobertura y uso de suelo en la Amazonía Ecuatoriana con ArcGIS Pro.",
     },
     {
-        id: 5,
+        id: 21,
         src: "/images/gallery/gis-dem-3d-qgis.jpg",
         thumb: "/images/gallery/gis-dem-3d-qgis.jpg",
         type: "image",
@@ -68,10 +123,19 @@ const galleryItems: GalleryItem[] = [
         title: "Modelo Digital de Elevación 3D – QGIS",
         description: "Visualización 3D de Modelo Digital de Elevación (DEM) con QGIS2threejs. Análisis hídrico y geomorfológico.",
     },
-
-    // Estructuras & BIM
     {
-        id: 6,
+        id: 22,
+        src: "/images/gallery/henrry-loja-panoramica.jpg",
+        thumb: "/images/gallery/henrry-loja-panoramica.jpg",
+        type: "image",
+        category: "GIS & Geomática",
+        title: "Vista Panorámica – Ciudad de Loja",
+        description: "Vista panorámica de la ciudad de Loja, Ecuador, con parque eólico al fondo. Base de operaciones de Henrry Lojan.",
+    },
+
+    // ── BIM & ESTRUCTURAS ─────────────────────────────────────
+    {
+        id: 30,
         src: "/images/gallery/estructuras-detalle-columna-revit.jpg",
         thumb: "/images/gallery/estructuras-detalle-columna-revit.jpg",
         type: "image",
@@ -80,121 +144,203 @@ const galleryItems: GalleryItem[] = [
         description: "Modelo BIM de detalle estructural: columna C1 (50×50cm) con zapata Z1, estribos 10mm y acero 14mm, elaborado en Revit.",
     },
 
-    // Investigación
+    // ── PRODUCCIÓN CIENTÍFICA ─────────────────────────────────
     {
-        id: 7,
+        id: 40,
         src: "/images/gallery/investigacion-igarss-paper.jpg",
         thumb: "/images/gallery/investigacion-igarss-paper.jpg",
         type: "image",
-        category: "Investigación",
+        category: "Producción Científica",
         title: "Publicación IGARSS 2026",
         description: "'Mining in the Southern Ecuadorian Amazon: Territorial Transformation and Biodiversity Loss in the Zamora and Nangaritza Rivers' – Artículo aceptado en IGARSS 2026.",
     },
-
-    // Proyectos (videos)
     {
-        id: 8,
-        src: "/images/gallery/video-obra-1.mp4",
-        thumb: "/images/gallery/henrry-loja-panoramica.jpg",
-        type: "video",
-        category: "Obras & Proyectos",
-        title: "Video de Obra – Proyecto en Campo",
-        description: "Registro en video de trabajo de campo e inspección de obra.",
-    },
-    {
-        id: 9,
-        src: "/images/gallery/video-obra-2.mp4",
-        thumb: "/images/gallery/henrry-loja-panoramica.jpg",
-        type: "video",
-        category: "Obras & Proyectos",
-        title: "Video de Proyecto – Avance de Obra",
-        description: "Documentación en video de avance de obra y control de calidad.",
-    },
-    {
-        id: 11,
-        src: "/images/gallery/video-obra-3.mp4",
-        thumb: "/images/gallery/henrry-loja-panoramica.jpg",
-        type: "video",
-        category: "Obras & Proyectos",
-        title: "Registro de Obra – Video 3",
-        description: "Documentación en video de actividades de obra civil.",
-    },
-    {
-        id: 12,
-        src: "/images/gallery/video-obra-4.mp4",
-        thumb: "/images/gallery/henrry-loja-panoramica.jpg",
-        type: "video",
-        category: "Obras & Proyectos",
-        title: "Registro de Obra – Video 4",
-        description: "Registro visual de avance y procesos constructivos.",
-    },
-    {
-        id: 13,
-        src: "/images/gallery/video-obra-5.mp4",
-        thumb: "/images/gallery/henrry-loja-panoramica.jpg",
-        type: "video",
-        category: "Obras & Proyectos",
-        title: "Registro de Obra – Video 5",
-        description: "Registro visual de avance y procesos constructivos.",
-    },
-    {
-        id: 14,
-        src: "/images/gallery/video-obra-6.mp4",
-        thumb: "/images/gallery/henrry-loja-panoramica.jpg",
-        type: "video",
-        category: "Obras & Proyectos",
-        title: "Registro de Obra – Video 6",
-        description: "Registro visual de avance y procesos constructivos.",
-    },
-    {
-        id: 15,
-        src: "/images/gallery/video-obra-7.mp4",
-        thumb: "/images/gallery/henrry-loja-panoramica.jpg",
-        type: "video",
-        category: "Obras & Proyectos",
-        title: "Registro de Obra – Video 7",
-        description: "Registro visual de avance y procesos constructivos.",
-    },
-    {
-        id: 16,
-        src: "/images/gallery/video-obra-8.mp4",
-        thumb: "/images/gallery/henrry-loja-panoramica.jpg",
-        type: "video",
-        category: "Obras & Proyectos",
-        title: "Registro de Obra – Video 8",
-        description: "Registro visual de avance y procesos constructivos.",
-    },
-    {
-        id: 17,
-        src: "/images/gallery/video-obra-9.mp4",
-        thumb: "/images/gallery/henrry-loja-panoramica.jpg",
-        type: "video",
-        category: "Obras & Proyectos",
-        title: "Registro de Obra – Video 9",
-        description: "Registro visual de avance y procesos constructivos.",
-    },
-
-    // Loja & Entorno
-    {
-        id: 10,
-        src: "/images/gallery/henrry-loja-panoramica.jpg",
-        thumb: "/images/gallery/henrry-loja-panoramica.jpg",
+        id: 41,
+        src: "/images/gallery/produccion-cientifica-1.jpg",
+        thumb: "/images/gallery/produccion-cientifica-1.jpg",
         type: "image",
-        category: "Obras & Proyectos",
-        title: "Vista Panorámica – Ciudad de Loja",
-        description: "Vista panorámica de la ciudad de Loja, Ecuador, con parque eólico al fondo. Base de operaciones de Henrry Lojan.",
+        category: "Producción Científica",
+        title: "Investigación en Geomática Aplicada",
+        description: "Documentación de investigación en teledetección y análisis geoespacial aplicado a minería y biodiversidad amazónica.",
+    },
+
+    // ── VISITAS DE OBRAS ──────────────────────────────────────
+    {
+        id: 50,
+        src: "/images/gallery/video-puente-condor-1.mp4",
+        thumb: "/images/gallery/visita-obra-puente-1.jpg",
+        type: "video",
+        category: "Visitas de Obras",
+        title: "Video – Puente Río Cóndor (1)",
+        description: "Registro en video de actividades de campo y control topográfico en el Puente Río Cóndor, Francisco de Orellana.",
+    },
+    {
+        id: 51,
+        src: "/images/gallery/video-puente-condor-2.mp4",
+        thumb: "/images/gallery/visita-obra-puente-2.jpg",
+        type: "video",
+        category: "Visitas de Obras",
+        title: "Video – Puente Río Cóndor (2)",
+        description: "Registro de actividades de inspección y replanteo en el Puente Río Cóndor.",
+    },
+    {
+        id: 52,
+        src: "/images/gallery/video-visita-obra-1.mp4",
+        thumb: "/images/gallery/visita-obra-equipo-1.jpg",
+        type: "video",
+        category: "Visitas de Obras",
+        title: "Video – Visita de Obra (1)",
+        description: "Registro de visita de obra civil, supervisión de elementos estructurales y control de calidad.",
+    },
+    {
+        id: 53,
+        src: "/images/gallery/video-visita-obra-2.mp4",
+        thumb: "/images/gallery/visita-obra-equipo-2.jpg",
+        type: "video",
+        category: "Visitas de Obras",
+        title: "Video – Visita de Obra (2)",
+        description: "Inspección de avance de obra y revisión de especificaciones técnicas en campo.",
+    },
+    {
+        id: 54,
+        src: "/images/gallery/video-visita-obra-3.mp4",
+        thumb: "/images/gallery/visita-obra-equipo-3.jpg",
+        type: "video",
+        category: "Visitas de Obras",
+        title: "Video – Visita de Obra (3)",
+        description: "Documentación visual de procesos constructivos y supervisión técnica.",
+    },
+    {
+        id: 55,
+        src: "/images/gallery/video-visita-obra-4.mp4",
+        thumb: "/images/gallery/visita-obra-civil-1.jpg",
+        type: "video",
+        category: "Visitas de Obras",
+        title: "Video – Control de Obra Civil (1)",
+        description: "Control de elementos estructurales, verificación de armados y concreto.",
+    },
+    {
+        id: 56,
+        src: "/images/gallery/video-visita-obra-5.mp4",
+        thumb: "/images/gallery/visita-obra-civil-2.jpg",
+        type: "video",
+        category: "Visitas de Obras",
+        title: "Video – Control de Obra Civil (2)",
+        description: "Revisión de procesos constructivos, mediciones y control de avance.",
+    },
+    {
+        id: 57,
+        src: "/images/gallery/video-visita-obra-6.mp4",
+        thumb: "/images/gallery/visita-obra-panoramica.jpg",
+        type: "video",
+        category: "Visitas de Obras",
+        title: "Video – Vista Panorámica de Obra",
+        description: "Vista panorámica de la obra con registro completo del estado de avance.",
+    },
+    {
+        id: 58,
+        src: "/images/gallery/video-visita-obra-7.mp4",
+        thumb: "/images/gallery/visita-obra-puente-1.jpg",
+        type: "video",
+        category: "Visitas de Obras",
+        title: "Video – Registro Final de Obra",
+        description: "Documentación final de obra: verificación de terminados, detalles y cierre.",
+    },
+    // Fotos de visitas de obras
+    {
+        id: 60,
+        src: "/images/gallery/visita-obra-puente-1.jpg",
+        thumb: "/images/gallery/visita-obra-puente-1.jpg",
+        type: "image",
+        category: "Visitas de Obras",
+        title: "Visita de Obra – Puente Río Cóndor",
+        description: "Registro fotográfico de visita de obra al Puente Río Cóndor, Francisco de Orellana.",
+    },
+    {
+        id: 61,
+        src: "/images/gallery/visita-obra-puente-2.jpg",
+        thumb: "/images/gallery/visita-obra-puente-2.jpg",
+        type: "image",
+        category: "Visitas de Obras",
+        title: "Inspección – Puente Río Cóndor",
+        description: "Inspección de elementos del puente y control geométrico de la estructura.",
+    },
+    {
+        id: 62,
+        src: "/images/gallery/visita-obra-equipo-1.jpg",
+        thumb: "/images/gallery/visita-obra-equipo-1.jpg",
+        type: "image",
+        category: "Visitas de Obras",
+        title: "Equipo Técnico en Obra",
+        description: "Equipo de trabajo realizando inspección y control de obra en campo.",
+    },
+    {
+        id: 63,
+        src: "/images/gallery/visita-obra-equipo-2.jpg",
+        thumb: "/images/gallery/visita-obra-equipo-2.jpg",
+        type: "image",
+        category: "Visitas de Obras",
+        title: "Coordinación de Obra en Campo",
+        description: "Coordinación técnica con equipo de obra durante visita de inspección.",
+    },
+    {
+        id: 64,
+        src: "/images/gallery/visita-obra-equipo-3.jpg",
+        thumb: "/images/gallery/visita-obra-equipo-3.jpg",
+        type: "image",
+        category: "Visitas de Obras",
+        title: "Revisión Técnica – Elementos Estructurales",
+        description: "Revisión de armados, materiales y especificaciones técnicas en obra.",
+    },
+    {
+        id: 65,
+        src: "/images/gallery/visita-obra-civil-1.jpg",
+        thumb: "/images/gallery/visita-obra-civil-1.jpg",
+        type: "image",
+        category: "Visitas de Obras",
+        title: "Control de Calidad – Obra Civil",
+        description: "Control de calidad de elementos de concreto y verificación de diseño.",
+    },
+    {
+        id: 66,
+        src: "/images/gallery/visita-obra-civil-2.jpg",
+        thumb: "/images/gallery/visita-obra-civil-2.jpg",
+        type: "image",
+        category: "Visitas de Obras",
+        title: "Supervisión de Construcción",
+        description: "Supervisión técnica de avance de obra y cumplimiento de especificaciones.",
+    },
+    {
+        id: 67,
+        src: "/images/gallery/visita-obra-panoramica.jpg",
+        thumb: "/images/gallery/visita-obra-panoramica.jpg",
+        type: "image",
+        category: "Visitas de Obras",
+        title: "Vista Panorámica – Zona de Obra",
+        description: "Vista panorámica de la zona de obra con entorno y accesos.",
     },
 ]
 
-const categories = ["Todos", "Topografía", "GIS & Geomática", "BIM & Estructuras", "Investigación", "Obras & Proyectos"]
+const categories = ["Todos", "Topografía", "GIS & Geomática", "BIM & Estructuras", "Producción Científica", "Visitas de Obras"]
 
 const categoryColors: Record<string, string> = {
     "Topografía": "bg-accent/10 text-accent border-accent/30",
     "GIS & Geomática": "bg-green-500/10 text-green-400 border-green-500/30",
     "BIM & Estructuras": "bg-primary/10 text-primary border-primary/30",
-    "Investigación": "bg-purple-500/10 text-purple-400 border-purple-500/30",
-    "Obras & Proyectos": "bg-blue-500/10 text-blue-400 border-blue-500/30",
+    "Producción Científica": "bg-purple-500/10 text-purple-400 border-purple-500/30",
+    "Visitas de Obras": "bg-blue-500/10 text-blue-400 border-blue-500/30",
 }
+
+const categoryIcons: Record<string, React.ReactNode> = {
+    "Topografía": <Mountain className="w-3.5 h-3.5" />,
+    "GIS & Geomática": <Camera className="w-3.5 h-3.5" />,
+    "BIM & Estructuras": <HardHat className="w-3.5 h-3.5" />,
+    "Producción Científica": <BookOpen className="w-3.5 h-3.5" />,
+    "Visitas de Obras": <Video className="w-3.5 h-3.5" />,
+}
+
+// Import React for JSX
+import React from "react"
 
 export function GallerySection() {
     const [activeCategory, setActiveCategory] = useState("Todos")
@@ -241,6 +387,10 @@ export function GallerySection() {
 
     const currentItem = lightboxIndex !== null ? filtered[lightboxIndex] : null
 
+    // Stats per category
+    const totalImages = filtered.filter((i) => i.type === "image").length
+    const totalVideos = filtered.filter((i) => i.type === "video").length
+
     return (
         <section id="gallery" className="py-20 lg:py-32 bg-card/30 relative">
             <div className="absolute inset-0 grid-pattern" />
@@ -252,27 +402,39 @@ export function GallerySection() {
                         Galería Visual
                     </Badge>
                     <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance">
-                        Mi Trabajo en Imágenes
+                        Mi Trabajo en Imágenes & Videos
                     </h2>
                     <p className="text-muted-foreground text-lg">
-                        Registro visual de proyectos, herramientas e investigaciones.
-                        Desde topografía de campo hasta análisis geoespacial avanzado.
+                        Registro visual de proyectos, visitas de obras, topografía de campo,
+                        producción científica y análisis geoespacial avanzado.
                     </p>
                 </div>
 
-                {/* Category Filter */}
-                <div className="flex flex-wrap justify-center gap-2 mb-10">
-                    {categories.map((cat) => (
+                {/* Category Filter – con íconos */}
+                <div className="flex flex-wrap justify-center gap-2 mb-6">
+                    <Button
+                        variant={activeCategory === "Todos" ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => setActiveCategory("Todos")}
+                        className={`rounded-full text-xs sm:text-sm ${activeCategory === "Todos"
+                            ? "glow-teal-sm"
+                            : "border-primary/30 hover:bg-primary/10 hover:border-primary/50"
+                            }`}
+                    >
+                        Todos
+                    </Button>
+                    {categories.filter(c => c !== "Todos").map((cat) => (
                         <Button
                             key={cat}
                             variant={activeCategory === cat ? "default" : "outline"}
                             size="sm"
                             onClick={() => setActiveCategory(cat)}
-                            className={`rounded-full text-xs sm:text-sm ${activeCategory === cat
+                            className={`rounded-full text-xs sm:text-sm flex items-center gap-1.5 ${activeCategory === cat
                                 ? "glow-teal-sm"
                                 : "border-primary/30 hover:bg-primary/10 hover:border-primary/50"
                                 }`}
                         >
+                            {categoryIcons[cat]}
                             {cat}
                         </Button>
                     ))}
@@ -282,11 +444,15 @@ export function GallerySection() {
                 <div className="flex justify-center gap-6 mb-8 text-xs text-muted-foreground">
                     <span className="flex items-center gap-1.5">
                         <Camera className="w-3.5 h-3.5 text-primary" />
-                        {filtered.filter((i) => i.type === "image").length} fotos
+                        {totalImages} fotos
                     </span>
                     <span className="flex items-center gap-1.5">
                         <Video className="w-3.5 h-3.5 text-accent" />
-                        {filtered.filter((i) => i.type === "video").length} videos
+                        {totalVideos} videos
+                    </span>
+                    <span className="text-muted-foreground/50">·</span>
+                    <span className="flex items-center gap-1.5 text-muted-foreground/70">
+                        {filtered.length} elementos
                     </span>
                 </div>
 
@@ -332,8 +498,9 @@ export function GallerySection() {
 
                                 {/* Category badge */}
                                 <Badge
-                                    className={`absolute top-3 left-3 text-xs ${categoryColors[item.category] || "bg-card text-foreground"}`}
+                                    className={`absolute top-3 left-3 text-xs flex items-center gap-1 ${categoryColors[item.category] || "bg-card text-foreground"}`}
                                 >
+                                    {categoryIcons[item.category]}
                                     {item.category}
                                 </Badge>
 
@@ -431,7 +598,8 @@ export function GallerySection() {
 
                         {/* Info */}
                         <div className="text-center px-4">
-                            <Badge className={`mb-2 text-xs ${categoryColors[currentItem.category] || ""}`}>
+                            <Badge className={`mb-2 text-xs flex items-center gap-1 mx-auto w-fit ${categoryColors[currentItem.category] || ""}`}>
+                                {categoryIcons[currentItem.category]}
                                 {currentItem.category}
                             </Badge>
                             <h3 className="text-lg font-semibold text-foreground">{currentItem.title}</h3>

@@ -21,6 +21,12 @@ import {
   ArrowRight,
   Github,
   ExternalLink,
+  Play,
+  ChevronLeft,
+  ChevronRight,
+  X,
+  FolderOpen,
+  Images,
 } from "lucide-react"
 import { imgPath } from "@/lib/img-path"
 
@@ -37,6 +43,13 @@ const categoryColors: Record<string, string> = {
   "Geotecnia": "bg-accent/10 text-accent border-accent/30",
   "Puentes": "bg-blue-500/10 text-blue-400 border-blue-500/30",
   "Open Source": "bg-purple-500/10 text-purple-400 border-purple-500/30",
+}
+
+// media item type for the Puente Río Condor gallery
+type MediaItem = {
+  src: string
+  type: "image" | "video"
+  caption: string
 }
 
 const projects = [
@@ -59,6 +72,8 @@ const projects = [
       location: "Loja, Ecuador",
     },
     technologies: ["SAP2000", "ETABS", "Revit", "AutoCAD"],
+    driveUrl: "https://drive.google.com/drive/folders/1Hq5pBRB25M878g8HC9M-N2TpjhxTusVG?usp=sharing",
+    media: [] as MediaItem[],
   },
   {
     id: 2,
@@ -79,6 +94,7 @@ const projects = [
       location: "Loja, Ecuador",
     },
     technologies: ["Revit", "Navisworks", "Civil 3D", "BIM 360"],
+    media: [] as MediaItem[],
   },
   {
     id: 3,
@@ -99,16 +115,17 @@ const projects = [
       location: "Loja, Ecuador",
     },
     technologies: ["Plaxis", "GeoStudio", "SAP2000", "AutoCAD"],
+    media: [] as MediaItem[],
   },
   {
     id: 4,
     title: "Puente Rio Condor",
     category: "Puentes",
-    image: "/images/project-bridge.jpg",
+    image: "/images/gallery/visita-obra-puente-1.jpg",
     description:
-      "Control topografico de precision para infraestructura en todas las etapas del Puente Rio Condor.",
+      "Control topografico de precision para infraestructura en todas las etapas del Puente Rio Condor. Registro completo de campo, replanteo y supervision de obra.",
     challenge:
-      "Mantener precision milimetrica en control geometrico durante todas las fases constructivas del puente.",
+      "Mantener precision milimetrica en control geometrico durante todas las fases constructivas del puente en zona de selva amazónica.",
     solution:
       "Implementacion de red geodesica GNSS/RTK y metodologia de reseccion multiple con estacion total, incrementando eficiencia operativa en 20%.",
     specs: {
@@ -119,6 +136,17 @@ const projects = [
       location: "Francisco de Orellana",
     },
     technologies: ["GNSS/RTK", "Estacion Total", "Civil 3D", "AutoCAD"],
+    // Videos y fotos reales del Puente Río Condor
+    media: [
+      { src: "/images/gallery/video-puente-condor-1.mp4", type: "video" as const, caption: "Video de obra – Puente Río Condor" },
+      { src: "/images/gallery/video-puente-condor-2.mp4", type: "video" as const, caption: "Video de campo – Puente Río Condor" },
+      { src: "/images/gallery/visita-obra-puente-1.jpg", type: "image" as const, caption: "Visita de obra – Puente Río Condor" },
+      { src: "/images/gallery/visita-obra-puente-2.jpg", type: "image" as const, caption: "Control topográfico – Puente Río Condor" },
+      { src: "/images/gallery/visita-obra-campo-1.jpg", type: "image" as const, caption: "Trabajo de campo en zona del puente" },
+      { src: "/images/gallery/visita-obra-campo-2.jpg", type: "image" as const, caption: "Equipo en campo – Puente Río Condor" },
+      { src: "/images/gallery/visita-obra-campo-3.jpg", type: "image" as const, caption: "Inspección de obra" },
+      { src: "/images/gallery/visita-obra-campo-4.jpg", type: "image" as const, caption: "Replanteo topográfico" },
+    ],
   },
   {
     id: 5,
@@ -140,6 +168,7 @@ const projects = [
     },
     technologies: ["HTML", "JavaScript", "Leaflet.js", "GeoJSON"],
     github: "https://github.com/Henrry-Lojan",
+    media: [] as MediaItem[],
   },
   {
     id: 6,
@@ -161,6 +190,7 @@ const projects = [
     },
     technologies: ["HTML", "JavaScript", "Chart.js", "Leaflet"],
     github: "https://github.com/Henrry-Lojan",
+    media: [] as MediaItem[],
   },
 ]
 
@@ -169,11 +199,31 @@ export function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<
     (typeof projects)[0] | null
   >(null)
+  const [mediaIndex, setMediaIndex] = useState(0)
 
   const filteredProjects =
     activeCategory === "Todos"
       ? projects
       : projects.filter((p) => p.category === activeCategory)
+
+  const openProject = (project: (typeof projects)[0]) => {
+    setSelectedProject(project)
+    setMediaIndex(0)
+  }
+
+  const currentMediaItem =
+    selectedProject && selectedProject.media.length > 0
+      ? selectedProject.media[mediaIndex]
+      : null
+
+  const prevMedia = () =>
+    setMediaIndex((i) =>
+      selectedProject ? (i - 1 + selectedProject.media.length) % selectedProject.media.length : 0
+    )
+  const nextMedia = () =>
+    setMediaIndex((i) =>
+      selectedProject ? (i + 1) % selectedProject.media.length : 0
+    )
 
   return (
     <section id="projects" className="py-20 lg:py-32 bg-card/30">
@@ -201,8 +251,8 @@ export function ProjectsSection() {
               size="sm"
               onClick={() => setActiveCategory(category)}
               className={`rounded-full ${activeCategory === category
-                  ? "glow-green-sm"
-                  : "border-primary/30 hover:bg-primary/10 hover:border-primary/50"
+                ? "glow-green-sm"
+                : "border-primary/30 hover:bg-primary/10 hover:border-primary/50"
                 }`}
             >
               {category}
@@ -216,7 +266,7 @@ export function ProjectsSection() {
             <Card
               key={project.id}
               className="group overflow-hidden bg-card border-border hover:border-primary/50 transition-all duration-300 cursor-pointer card-hover"
-              onClick={() => setSelectedProject(project)}
+              onClick={() => openProject(project)}
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
@@ -233,6 +283,14 @@ export function ProjectsSection() {
                 <Badge className={`absolute top-4 left-4 ${categoryColors[project.category] || "bg-primary/10 text-primary"}`}>
                   {project.category}
                 </Badge>
+
+                {/* Media count badge */}
+                {project.media.length > 0 && (
+                  <div className="absolute top-4 right-4 flex items-center gap-1 bg-black/60 text-white text-xs px-2 py-1 rounded-full backdrop-blur-sm">
+                    <Play className="w-3 h-3" />
+                    <span>{project.media.filter(m => m.type === "video").length} videos · {project.media.filter(m => m.type === "image").length} fotos</span>
+                  </div>
+                )}
 
                 {/* Quick View Icon */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -280,16 +338,111 @@ export function ProjectsSection() {
                   </DialogDescription>
                 </DialogHeader>
 
-                {/* Project Image */}
-                <div className="relative aspect-video rounded-lg overflow-hidden my-4 border border-primary/20">
-                  <Image
-                    src={imgPath(selectedProject.image) || "/placeholder.svg"}
-                    alt={selectedProject.title}
-                    fill
-                    className="object-cover"
-                    unoptimized
-                  />
-                </div>
+                {/* ── Media Gallery (si tiene media real) ── */}
+                {selectedProject.media.length > 0 && currentMediaItem ? (
+                  <div className="my-4 space-y-3">
+                    {/* Visor principal */}
+                    <div className="relative rounded-xl overflow-hidden border border-primary/20 bg-black">
+                      {currentMediaItem.type === "video" ? (
+                        <video
+                          key={currentMediaItem.src}
+                          src={imgPath(currentMediaItem.src)}
+                          controls
+                          autoPlay
+                          className="w-full max-h-[50vh] object-contain"
+                          style={{ background: "#000" }}
+                        />
+                      ) : (
+                        <div className="relative w-full aspect-video">
+                          <Image
+                            src={imgPath(currentMediaItem.src)}
+                            alt={currentMediaItem.caption}
+                            fill
+                            className="object-contain"
+                            unoptimized
+                          />
+                        </div>
+                      )}
+
+                      {/* Tipo de media */}
+                      <div className="absolute top-3 left-3">
+                        <Badge className={currentMediaItem.type === "video"
+                          ? "bg-accent/80 text-white border-0"
+                          : "bg-primary/80 text-white border-0"
+                        }>
+                          {currentMediaItem.type === "video" ? "▶ Video" : "📷 Foto"}
+                        </Badge>
+                      </div>
+
+                      {/* Navegación */}
+                      {selectedProject.media.length > 1 && (
+                        <>
+                          <button
+                            className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 border border-white/20 flex items-center justify-center hover:bg-black/80 transition-all"
+                            onClick={prevMedia}
+                          >
+                            <ChevronLeft className="w-5 h-5 text-white" />
+                          </button>
+                          <button
+                            className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 border border-white/20 flex items-center justify-center hover:bg-black/80 transition-all"
+                            onClick={nextMedia}
+                          >
+                            <ChevronRight className="w-5 h-5 text-white" />
+                          </button>
+                          <div className="absolute bottom-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
+                            {mediaIndex + 1} / {selectedProject.media.length}
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Caption */}
+                    <p className="text-sm text-center text-muted-foreground italic">
+                      {currentMediaItem.caption}
+                    </p>
+
+                    {/* Thumbnails strip */}
+                    {selectedProject.media.length > 1 && (
+                      <div className="flex gap-2 overflow-x-auto pb-1">
+                        {selectedProject.media.map((m, i) => (
+                          <button
+                            key={i}
+                            onClick={() => setMediaIndex(i)}
+                            className={`relative flex-shrink-0 w-20 h-14 rounded-lg overflow-hidden border-2 transition-all ${i === mediaIndex
+                              ? "border-primary glow-teal-sm"
+                              : "border-border hover:border-primary/50"
+                              }`}
+                          >
+                            {m.type === "video" ? (
+                              <div className="w-full h-full bg-black/80 flex items-center justify-center">
+                                <Play className="w-5 h-5 text-accent" />
+                              </div>
+                            ) : (
+                              <Image
+                                src={imgPath(m.src)}
+                                alt={m.caption}
+                                fill
+                                className="object-cover"
+                                unoptimized
+                              />
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  /* Imagen estática si no hay media */
+                  <div className="relative aspect-video rounded-lg overflow-hidden my-4 border border-primary/20">
+                    <Image
+                      src={imgPath(selectedProject.image) || "/placeholder.svg"}
+                      alt={selectedProject.title}
+                      fill
+                      className="object-cover"
+                      unoptimized
+                    />
+                  </div>
+                )}
 
                 {/* Project Specs */}
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-4 my-6">
@@ -318,9 +471,9 @@ export function ProjectsSection() {
                       icon: MapPin,
                       label: "Escala",
                       value:
-                        selectedProject.specs.area ||
-                        selectedProject.specs.height ||
-                        selectedProject.specs.type,
+                        (selectedProject.specs as any).area ||
+                        (selectedProject.specs as any).height ||
+                        (selectedProject.specs as any).type,
                     },
                   ]
                     .filter((spec) => spec.value)
@@ -374,9 +527,40 @@ export function ProjectsSection() {
                   </div>
                 </div>
 
-                {/* GitHub Link for Open Source projects */}
-                {selectedProject.github && (
+                {/* Google Drive Album – banner llamativo */}
+                {"driveUrl" in selectedProject && selectedProject.driveUrl && (
                   <div className="mt-6 pt-4 border-t border-border">
+                    <a
+                      href={(selectedProject as any).driveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-4 p-4 rounded-xl border border-blue-500/30 bg-gradient-to-r from-blue-500/10 via-primary/5 to-green-500/10 hover:from-blue-500/20 hover:via-primary/10 hover:to-green-500/20 hover:border-blue-400/50 transition-all duration-300"
+                    >
+                      {/* Ícono Drive */}
+                      <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <FolderOpen className="w-6 h-6 text-blue-400" />
+                      </div>
+
+                      {/* Texto */}
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                          Ver Álbum Completo de Fotos
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-0.5 flex items-center gap-1">
+                          <Images className="w-3 h-3" />
+                          Todas las fotos y videos en Google Drive
+                        </p>
+                      </div>
+
+                      {/* Flecha */}
+                      <ExternalLink className="w-4 h-4 text-blue-400/70 group-hover:text-blue-400 flex-shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </a>
+                  </div>
+                )}
+
+                {/* GitHub Link for Open Source projects */}
+                {"github" in selectedProject && selectedProject.github && (
+                  <div className="mt-4">
                     <a
                       href={selectedProject.github}
                       target="_blank"
