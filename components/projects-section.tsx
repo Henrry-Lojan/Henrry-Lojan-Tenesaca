@@ -57,7 +57,7 @@ const projects = [
     id: 1,
     title: "Edificio Alarife",
     category: "Edificacion",
-    image: "/images/project-building.jpg",
+    image: "/images/project-alarife.jpg",
     description:
       "Edificio multifamiliar de 3,034 m2 con cimentaciones especiales mediante caissons de 18m de profundidad.",
     challenge:
