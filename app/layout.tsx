@@ -63,10 +63,10 @@ export default function RootLayout({
         {/* Google Analytics GA4 */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-C28W8P9JVP"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
         />
-        <Script id="google-analytics" strategy="beforeInteractive">
-          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-C28W8P9JVP');`}
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-C28W8P9JVP',{'send_page_view':true});`}
         </Script>
       </body>
     </html>
