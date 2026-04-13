@@ -17,10 +17,10 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Henrry Lojan | Ingeniero Civil & Especialista GIS',
+  title: 'Henrry Lojan-Tenesaca | Ingeniero Civil & Especialista GIS',
   description: 'Ingeniero Civil con Maestria en Geomatica. Especializado en infraestructura, BIM, GIS y proyectos de construccion. Loja, Ecuador.',
   keywords: ['ingeniero civil', 'geomatica', 'gis', 'bim', 'infraestructura', 'construccion', 'loja', 'ecuador'],
-  authors: [{ name: 'Henrry Lojan' }],
+  authors: [{ name: 'Henrry Lojan-Tenesaca' }],
   generator: 'v0.app',
   icons: {
     icon: [
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     apple: '/apple-icon.png',
   },
   openGraph: {
-    title: 'Henrry Lojan | Ingeniero Civil & Especialista GIS',
+    title: 'Henrry Lojan-Tenesaca | Ingeniero Civil & Especialista GIS',
     description: 'Ingeniero Civil con Maestria en Geomatica. Especializado en infraestructura, BIM, GIS y proyectos de construccion.',
     type: 'website',
   },

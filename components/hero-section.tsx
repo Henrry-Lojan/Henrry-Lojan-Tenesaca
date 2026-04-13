@@ -62,9 +62,7 @@ export function HeroSection() {
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight text-balance">
                 Henrry{" "}
-                <span className="text-primary text-glow">Lojan</span>
-                <br />
-                <span className="text-3xl md:text-4xl lg:text-5xl">Tenesaca</span>
+                <span className="text-primary text-glow">Lojan-Tenesaca</span>
               </h1>
 
               <p className="text-xl md:text-2xl text-primary font-semibold">
