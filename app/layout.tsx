@@ -1,7 +1,6 @@
 import React from "react"
 import type { Metadata, Viewport } from 'next'
 import { Poppins, JetBrains_Mono } from 'next/font/google'
-import Script from 'next/script'
 import './globals.css'
 
 const poppins = Poppins({ 
@@ -58,16 +57,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="dark">
+      <head>
+        {/* Google Analytics GA4 - native tags for static export compatibility */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-C28W8P9JVP"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-C28W8P9JVP', {'send_page_view': true});
+            `,
+          }}
+        />
+      </head>
       <body className={`${poppins.className} ${jetbrainsMono.variable} font-sans antialiased`}>
         {children}
-        {/* Google Analytics GA4 */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-C28W8P9JVP"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-C28W8P9JVP',{'send_page_view':true});`}
-        </Script>
       </body>
     </html>
   )
